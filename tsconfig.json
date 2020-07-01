@@ -1,0 +1,8 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "sourceMap": true,
+        "declaration": true
+    },
+    "include": ["*.ts"]
+}
