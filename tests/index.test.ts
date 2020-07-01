@@ -1,9 +1,8 @@
-import Formatter from '../'
+import format from '../'
 
 test('should convert unicode char correctly', function () {
-  const formatter = new Formatter()
   expect(
-    formatter.format([
+    format([
       {
         usedDeprecatedRules: [],
         filePath: 'foo.ts',

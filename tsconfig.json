@@ -2,7 +2,10 @@
     "compilerOptions": {
         "strict": true,
         "sourceMap": true,
-        "declaration": true
+        "declaration": true,
+        "esModuleInterop": true,
+        "target": "es6",
+        "module": "commonjs"
     },
     "include": ["*.ts"]
 }

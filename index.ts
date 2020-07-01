@@ -32,46 +32,44 @@ function convertUnicodeRangeToBytes(
   ]
 }
 
-export default class Formatter implements ESLint.Formatter {
-  format(results: ESLint.LintResult[]): string {
-    const msgs: ArcanistMessage[] = []
-    if (!Array.isArray(results) || !results.length) {
-      return JSON.stringify(msgs)
-    }
-
-    for (const r of results) {
-      const {source} = r
-      for (const m of r.messages) {
-        const msg: ArcanistMessage = {
-          char: m.column,
-          code: 'ESLint',
-          description: m.message,
-          line: m.line,
-          name: m.ruleId || 'unknown',
-          original: null,
-          path: r.filePath,
-          replacement: null,
-          severity: m.severity,
-        }
-
-        if (m.fix && source) {
-          msg.original = source.substr(
-            m.fix.range[0],
-            m.fix.range[1] - m.fix.range[0]
-          )
-          // Also convert line since fix can span multiple lines
-          const [line, char] = convertUnicodeRangeToBytes(
-            source,
-            m.fix.range[0] + 1
-          )
-          msg.line = line
-          msg.char = char
-          msg.replacement = m.fix.text
-        }
-
-        msgs.push(msg)
-      }
-    }
+export = function format(results: ESLint.LintResult[]): string {
+  const msgs: ArcanistMessage[] = []
+  if (!Array.isArray(results) || !results.length) {
     return JSON.stringify(msgs)
   }
+
+  for (const r of results) {
+    const {source} = r
+    for (const m of r.messages) {
+      const msg: ArcanistMessage = {
+        char: m.column,
+        code: 'ESLint',
+        description: m.message,
+        line: m.line,
+        name: m.ruleId || 'unknown',
+        original: null,
+        path: r.filePath,
+        replacement: null,
+        severity: m.severity,
+      }
+
+      if (m.fix && source) {
+        msg.original = source.substr(
+          m.fix.range[0],
+          m.fix.range[1] - m.fix.range[0]
+        )
+        // Also convert line since fix can span multiple lines
+        const [line, char] = convertUnicodeRangeToBytes(
+          source,
+          m.fix.range[0] + 1
+        )
+        msg.line = line
+        msg.char = char
+        msg.replacement = m.fix.text
+      }
+
+      msgs.push(msg)
+    }
+  }
+  return JSON.stringify(msgs)
 }
