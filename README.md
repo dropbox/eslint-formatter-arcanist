@@ -1,5 +1,7 @@
 # ESLint Formatter for Arcanist
 
+![Node.js CI](https://github.com/dropbox/eslint-formatter-arcanist/workflows/Node.js%20CI/badge.svg)
+
 This formatter translate ESLint JSON output to Arcanist so it can be used with any generic arc linter.
 
 # Usage
