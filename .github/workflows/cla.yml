@@ -20,6 +20,6 @@ jobs:
         path-To-cladocument: 'https://opensource.dropbox.com/cla/'
         # branch should not be protected
         branch: 'cla'
-        whitelist: dependabot
+        whitelist: dependabot,bot*
         empty-commit-flag: false
         blockchain-storage-flag: false
